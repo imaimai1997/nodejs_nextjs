@@ -2,7 +2,7 @@ import express from "express";
 import type { Request, Response} from "express";
 
 const app = express();
-const PORT = 8000;
+const PORT = 8080;
 
 app.get("/apptodos", (req:Request,res:Response)  => {
   return res.send("todos");
