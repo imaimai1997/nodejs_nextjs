@@ -23,7 +23,26 @@ app.post("/createtodo", async(req:Request,res:Response)  => {
   });
   return res.json(createTodo);
 } catch (e){
-  return e;
+    return res.status(400).json(e);
 }
 });
+
+app.put("/edittodo/:id", async(req:Request,res:Response)  => {
+  try{
+  const id = Number(req.params.id);
+  const {title, isCompleted} = req.body;
+  const editTodo = await prisma.todo.update({
+    where:{id},
+    data:{
+      title,
+      isCompleted,
+    },
+  });
+  return res.json(editTodo);
+} catch (e){
+  return res.status(400).json(e);
+}
+});
+
+
 app.listen(PORT,()=> console.log("server is running"));
